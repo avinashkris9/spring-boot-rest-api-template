@@ -9,5 +9,11 @@ This is to quickly start api development with basic package structure and suppor
   - Spring Data JPA Support
   - Spring Security Basic Auth Support
   - Logging support
+  - Entity classes
+  - Custom Object Mapper 
   - Custom Exception handler with controller advice
+  - Utility class for error code handling.
+  
+  
+
  
