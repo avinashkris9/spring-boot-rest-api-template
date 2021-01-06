@@ -17,7 +17,8 @@ COPY --from=build /usr/src/app/target/${artifact} /usr/src/app/${artifact}
 RUN chmod 755 /usr/src/app/${artifact}
  EXPOSE 8080
  #ENTRYPOINT ["sh", "-c","java"]
- 
- CMD java -jar /usr/src/app/$artifact
-#CMD ["java -jar /usr/src/app/${artifact}"]
+ ## docker build --build-arg artificatid=spring-boot-api-template --build-arg "version=0.0.1-SNAPSHOT" .
 
+CMD java -jar /usr/src/app/$artifact
+#CMD ["sh","-c","java -jar /usr/src/app/$artifact"]
+#CMD ["sh", "-c", "ps", "-ef" ]
