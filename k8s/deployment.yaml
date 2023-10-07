@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spring-boot-api-template
+  labels:
+    app.kubernetes.io/name: spring-boot-api-template
+    app.kubernetes.io/version: COMMIT_SHA
+spec:
+  selector:
+    matchLabels:
+      app: spring-boot-api-template
+  template:
+    metadata:
+      labels:
+        app: spring-boot-api-template
+        app.kubernetes.io/name: spring-boot-api-template  
+    spec:
+      containers:
+      - name: spring-boot-api-template
+        image: spring-boot-api-template:latest
+        imagePullPolicy: Never
+        resources:
+          limits:
+            memory: "1024Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 8080
+          name: http
+          protocol: TCP
+        livenessProbe:
+          httpGet:
+            path: /actuator/health
+            port: 8080
+
+          initialDelaySeconds: 30
+          periodSeconds: 15
+        readinessProbe:
+          httpGet:
+            path: /actuator/health
+            port: 8080
+          initialDelaySeconds: 30
+          periodSeconds: 15
