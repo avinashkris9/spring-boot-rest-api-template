@@ -84,7 +84,7 @@ pipeline {
                   stage('Docker build') {
           steps {
             sh """
-                docker build --pull  --build-arg artificatid=${APP_NAME}  -t ${APP_NAME}:latest  -t "${DOCKER_REPO}/${APP_NAME}:${DOCKER_TAG}" .
+                docker build --pull  --build-arg NAME=${APP_NAME}  -t ${APP_NAME}:latest  -t "${DOCKER_REPO}/${APP_NAME}:${DOCKER_TAG}" .
                 """
           }
         }
