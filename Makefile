@@ -19,10 +19,10 @@ build: ## Build Locally
 
 docker: ## Build docker image
 	# docker build --pull  --build-arg artificatid=${APP_NAME} --build-arg "version=${APP_VERSION}" -t ${APP_NAME}:latest -t ${DOCKER_IMAGE_NAME}:latest .
-	docker build --pull  --build-arg artificatid=${APP_NAME}  -t ${DOCKER_IMAGE_NAME}:latest -t ${APP_NAME}:latest  .
+	docker build --pull  --build-arg artificatid=${APP_NAME}  -t ${DOCKER_IMAGE_NAME}:latest -t ${APP_NAME}:latest -f Dockerfile-dev  .
 
 
-run: docker ## run local k8s
+run-k8s: docker ## run local k8s
 
 	kubectl --context ${KUBE_CONTEXT} apply -f ./k8s/
 	kubectl --context ${KUBE_CONTEXT} wait pod -l app.kubernetes.io/name=${APP_NAME} --for=condition=Ready --timeout=720s
@@ -30,3 +30,7 @@ run: docker ## run local k8s
 destroy: ## Destroy k8s resources
 
 	kubectl --context ${KUBE_CONTEXT} delete --ignore-not-found=true -f ./k8s/
+
+run: docker ## run docker
+
+	docker run --rm -it docker.io/library/spring-boot-api-template:latest
