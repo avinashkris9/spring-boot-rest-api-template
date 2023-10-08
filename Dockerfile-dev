@@ -1,0 +1,16 @@
+FROM openjdk:8-jre-alpine
+LABEL description="Sample Java Rest API Project" \
+      name="spring-boot-api-template"
+ARG artificatid="UNAVAILBLE"
+# ARG version
+RUN addgroup -S appgroup && adduser -S appuser -G appgroup
+RUN mkdir /opt/app  && chown appuser /opt/app
+USER appuser
+ARG JAVA_APP_JAR="./target/*.jar"
+EXPOSE 8080
+WORKDIR /opt/app/
+ENV APP_NAME=$artificatid
+COPY  --chown=appuser:appgroup ./scripts/run-java.sh .
+COPY --chown=appuser:appgroup .${JAVA_APP_JAR} .
+RUN chmod 755 *.jar
+ENTRYPOINT [ "/opt/app/run-java.sh"]
