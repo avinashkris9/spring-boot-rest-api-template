@@ -35,6 +35,6 @@ make run
 
 If you've a Kubernetes context available via `docker-desktop` or any other method, below command will run a `Deployment` using resource definition available in `k8s` folder.
 ```sh
-make run-k8s
+make pod-run
 ```
 
